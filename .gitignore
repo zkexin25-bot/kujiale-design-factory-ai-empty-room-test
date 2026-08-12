@@ -1,0 +1,6 @@
+﻿work/node_modules/
+work/tmp_compare_update.html
+work/compare_paths.patch
+*.log
+.DS_Store
+Thumbs.db
