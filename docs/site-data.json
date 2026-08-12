@@ -1,0 +1,40 @@
+{
+  "total": 45,
+  "sets": [
+    {
+      "key": "original",
+      "label": "原图",
+      "tag": "Original",
+      "folder": "images/original",
+      "prefix": "空房间测试"
+    },
+    {
+      "key": "beautifyOnline",
+      "label": "AI 美化线上版",
+      "tag": "Beautify Online",
+      "folder": "images/beautify-online",
+      "prefix": "空房间ai美化线上版"
+    },
+    {
+      "key": "beautifyLora",
+      "label": "AI 美化 LoRA 版",
+      "tag": "Beautify LoRA",
+      "folder": "images/beautify-lora",
+      "prefix": "空房间ai美化测试"
+    },
+    {
+      "key": "realtime",
+      "label": "实时增强结果版",
+      "tag": "Realtime",
+      "folder": "images/realtime",
+      "prefix": "空房间实时增强测试"
+    },
+    {
+      "key": "realtimeLora",
+      "label": "实时增强 LoRA 版",
+      "tag": "Realtime LoRA",
+      "folder": "images/realtime-lora",
+      "prefix": "空房间实时增强lora测试"
+    }
+  ]
+}

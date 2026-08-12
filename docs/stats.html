@@ -1,0 +1,275 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>空房间测试统计页</title>
+  <style>
+    :root {
+      --bg: #f4efe6;
+      --panel: rgba(255,255,255,0.88);
+      --line: rgba(79, 63, 42, 0.14);
+      --text: #2d2418;
+      --muted: #776754;
+      --accent: #b85f31;
+      --accent-soft: #f4ddcf;
+      --shadow: 0 22px 60px rgba(86, 63, 31, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(235, 201, 172, 0.54), transparent 28%),
+        radial-gradient(circle at top right, rgba(211, 225, 210, 0.5), transparent 24%),
+        linear-gradient(180deg, #f8f4ec 0%, #efe8dc 100%);
+      min-height: 100vh;
+    }
+    .shell { width: min(1460px, calc(100vw - 32px)); margin: 24px auto 40px; }
+    .hero, .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .hero { padding: 28px; position: sticky; top: 12px; z-index: 20; }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    h1 { margin: 0; font-size: clamp(30px, 4vw, 50px); line-height: 1.05; letter-spacing: -0.04em; }
+    .hero p { margin: 10px 0 0; font-size: 15px; line-height: 1.7; color: var(--muted); max-width: 980px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .button-link, button {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 16px;
+      border-radius: 16px; border: 1px solid var(--line); background: rgba(255,255,255,0.92);
+      color: var(--text); font-size: 14px; font-weight: 700; text-decoration: none; cursor: pointer;
+    }
+    button.primary, .button-link.primary { background: linear-gradient(135deg, #d97844, #be5f30); color: #fff; border-color: transparent; }
+    .summary-grid, .matrix-grid, .issues-grid, .notes-grid, .compare-grid, .compare-pair { display: grid; gap: 16px; }
+    .summary-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 22px; }
+    .stat-card {
+      padding: 18px; border-radius: 22px; background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(112, 92, 70, 0.12);
+    }
+    .stat-card small { display: block; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-card strong { display: block; margin-top: 10px; font-size: clamp(24px, 3vw, 38px); letter-spacing: -0.04em; }
+    .stat-card span { display: block; margin-top: 6px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .sections { display: grid; gap: 18px; margin-top: 24px; }
+    .section { padding: 22px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 18px; }
+    .section-head h2 { margin: 0; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.03em; }
+    .section-head p { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+    .badge {
+      padding: 8px 12px; border-radius: 999px; background: var(--accent-soft);
+      color: #8a4c23; font-size: 12px; font-weight: 700; white-space: nowrap;
+    }
+    .matrix-grid, .issues-grid, .notes-grid, .compare-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .matrix-card, .issues-card, .note-card, .compare-card, .compare-side {
+      background: rgba(255,255,255,0.76); border: 1px solid rgba(112, 92, 70, 0.12);
+      border-radius: 22px; padding: 18px;
+    }
+    .matrix-card h3, .issues-card h3, .note-card h3, .compare-card h3, .compare-side h4 {
+      margin: 0 0 14px; font-size: 18px; letter-spacing: -0.02em;
+    }
+    .matrix-topline { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+    .mini-chip {
+      padding: 7px 10px; border-radius: 999px; background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line); color: var(--muted); font-size: 12px;
+    }
+    .grade-list { display: grid; gap: 10px; }
+    .grade-row { display: grid; grid-template-columns: 74px 1fr 84px; gap: 10px; align-items: center; }
+    .grade-label { font-weight: 700; font-size: 13px; }
+    .bar { height: 12px; border-radius: 999px; background: rgba(121, 102, 78, 0.12); overflow: hidden; }
+    .bar span { display: block; height: 100%; border-radius: 999px; }
+    .bar-a { background: #7abf7c; }
+    .bar-b { background: #b9c96a; }
+    .bar-c { background: #d8a95a; }
+    .bar-d { background: #d56f5c; }
+    .grade-value { color: var(--muted); font-size: 12px; text-align: right; }
+    .compare-list, .issue-list, .note-list { display: grid; gap: 10px; }
+    .compare-item, .issue-item, .note-item {
+      padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(112, 92, 70, 0.12);
+    }
+    .compare-item strong, .issue-item strong, .note-item strong { display: block; font-size: 14px; }
+    .compare-item span, .issue-item span, .note-item span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .empty {
+      padding: 16px; border-radius: 18px; background: rgba(255,255,255,0.7);
+      border: 1px dashed rgba(112, 92, 70, 0.18); color: var(--muted); font-size: 14px;
+    }
+    @media (max-width: 1080px) {
+      .summary-grid, .matrix-grid, .issues-grid, .notes-grid, .compare-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100vw - 16px, 100%); margin: 12px auto 28px; }
+      .hero { padding: 20px 18px; position: static; }
+      .hero-actions { flex-direction: column; }
+      .button-link, button { width: 100%; }
+      .section { padding: 16px; border-radius: 22px; }
+      .grade-row { grid-template-columns: 58px 1fr 72px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">Public Review Snapshot</div>
+      <h1>空房间测试统计页</h1>
+      <p>这里展示当前整理好的公开评估结果，任何人都可以直接查看评分覆盖率、等级比例，以及备注里最常提到的主要问题。</p>
+      <div class="hero-actions">
+        <a class="button-link primary" href="./index.html">返回对照页</a>
+        <button id="refreshBtn" type="button">刷新统计</button>
+      </div>
+      <div class="summary-grid" id="summaryGrid"></div>
+    </section>
+    <div class="sections">
+      <section class="section">
+        <div class="section-head"><div><h2>测试集结果与比例</h2><p>按测试集查看评分覆盖率、A/B/C/D 分布以及严重错误占比。</p></div><div class="badge">By Set</div></div>
+        <div class="matrix-grid" id="matrixGrid"></div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>同类关键词对照</h2><p>把无 LoRA 和有 LoRA 放到同一组里看，通过率、D 比例和高频问题都能直接横向比较。</p></div><div class="badge">Pair Compare</div></div>
+        <div class="compare-grid" id="compareGrid"></div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>整体高频问题</h2><p>先看全局最常见的问题，再看每个测试集内部出现最多的风险点。</p></div><div class="badge">Top Issues</div></div>
+        <div class="issues-grid">
+          <div class="issues-card"><h3>整体高频问题</h3><div class="issue-list" id="overallIssues"></div></div>
+          <div class="issues-card"><h3>各测试集主要问题</h3><div class="issue-list" id="setIssues"></div></div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>备注明细</h2><p>保留当前公开快照里的主要评分和备注，方便回看具体场景。</p></div><div class="badge">Notes</div></div>
+        <div class="notes-grid" id="notesGrid"></div>
+      </section>
+    </div>
+  </div>
+  <script>
+    const SCORES_PATH = './room_compare_scores.json';
+    const TOTAL_SCENES = 45;
+    const testSets = [
+      { key: 'beautifyOnline', label: 'AI 美化线上版' },
+      { key: 'beautifyLora', label: 'AI 美化 LoRA 版' },
+      { key: 'realtime', label: '实时增强结果版' },
+      { key: 'realtimeLora', label: '实时增强 LoRA 版' }
+    ];
+    const comparePairs = [
+      { title: 'AI 美化：线上版 vs LoRA', left: { key: 'beautifyOnline', label: 'AI 美化线上版' }, right: { key: 'beautifyLora', label: 'AI 美化 LoRA 版' } },
+      { title: '实时增强：结果版 vs LoRA', left: { key: 'realtime', label: '实时增强结果版' }, right: { key: 'realtimeLora', label: '实时增强 LoRA 版' } }
+    ];
+    const issueRules = [
+      { label: '颜色/色差', patterns: [/颜色|色差|偏色|变紫|变深|变浅|变白|变黑|发蓝|发紫|色温/i] },
+      { label: '材质错误', patterns: [/材质|瓷砖|地板|石材|美缝|纹理|墙材|材质感/i] },
+      { label: '光影/曝光', patterns: [/曝光|光斑|反光|光影|射灯|灯带|炫光|格纹光|透光|强光/i] },
+      { label: '结构/物体幻觉', patterns: [/柜子|把手|结构|洗手液|灯泡|马桶|多了|凭空|墙变/i] },
+      { label: '细节丢失/过增强', patterns: [/消掉|花纹|封模线|结构线|坑|增强|抹掉|过强|过度/i] }
+    ];
+    const summaryGrid = document.getElementById('summaryGrid');
+    const matrixGrid = document.getElementById('matrixGrid');
+    const compareGrid = document.getElementById('compareGrid');
+    const overallIssues = document.getElementById('overallIssues');
+    const setIssues = document.getElementById('setIssues');
+    const notesGrid = document.getElementById('notesGrid');
+    const refreshBtn = document.getElementById('refreshBtn');
+    function pad(num) { return String(num).padStart(2, '0'); }
+    async function getEntries() {
+      const response = await fetch(SCORES_PATH);
+      const store = await response.json();
+      return Object.entries(store).map(([key, value]) => {
+        const match = key.match(/^(.*)_(\d{2})$/);
+        if (!match) return null;
+        const set = testSets.find(item => item.key === match[1]);
+        if (!set) return null;
+        return { key, setKey: set.key, setLabel: set.label, sceneId: Number(match[2]), grade: value?.grade || '', note: value?.note?.trim?.() || '' };
+      }).filter(Boolean);
+    }
+    function getGradeCounts(entries) {
+      const counts = { A: 0, B: 0, C: 0, D: 0 };
+      entries.forEach(entry => { if (counts[entry.grade] != null) counts[entry.grade] += 1; });
+      return counts;
+    }
+    function percent(part, whole) { return whole ? `${((part / whole) * 100).toFixed(1)}%` : '0.0%'; }
+    function detectIssues(note) {
+      const hits = [];
+      issueRules.forEach(rule => { if (rule.patterns.some(pattern => pattern.test(note))) hits.push(rule.label); });
+      return hits.length ? hits : ['其他备注'];
+    }
+    function countIssuesForEntries(entries) {
+      const map = new Map();
+      entries.filter(item => item.note).forEach(entry => {
+        detectIssues(entry.note).forEach(label => map.set(label, (map.get(label) || 0) + 1));
+      });
+      return [...map.entries()].sort((a, b) => b[1] - a[1]);
+    }
+    function renderSummary(entries) {
+      const graded = entries.filter(item => item.grade);
+      const noted = entries.filter(item => item.note);
+      const counts = getGradeCounts(graded);
+      const passCount = counts.A + counts.B + counts.C;
+      const totalSlots = TOTAL_SCENES * testSets.length;
+      summaryGrid.innerHTML = [
+        { label: '已评分数量', value: graded.length, sub: `覆盖率 ${percent(graded.length, totalSlots)}，共 ${totalSlots} 个可评分位置` },
+        { label: '严重错误 D', value: counts.D, sub: `占已评分样本 ${percent(counts.D, graded.length)}` },
+        { label: '可接受 A/B/C', value: passCount, sub: `占已评分样本 ${percent(passCount, graded.length)}` },
+        { label: '已写备注', value: noted.length, sub: noted.length ? '已可用于问题归纳' : '还没有备注内容可统计' }
+      ].map(card => `<div class="stat-card"><small>${card.label}</small><strong>${card.value}</strong><span>${card.sub}</span></div>`).join('');
+    }
+    function renderMatrix(entries) {
+      matrixGrid.innerHTML = testSets.map(set => {
+        const graded = entries.filter(item => item.setKey === set.key && item.grade);
+        const counts = getGradeCounts(graded);
+        return `<div class="matrix-card"><h3>${set.label}</h3><div class="matrix-topline"><div class="mini-chip">评分覆盖率 ${percent(graded.length, TOTAL_SCENES)}</div><div class="mini-chip">已评分 ${graded.length} / ${TOTAL_SCENES}</div><div class="mini-chip">D 比例 ${percent(counts.D, graded.length)}</div></div><div class="grade-list">${['A','B','C','D'].map(grade => `<div class="grade-row"><div class="grade-label">${grade}</div><div class="bar"><span class="bar-${grade.toLowerCase()}" style="width:${graded.length ? (counts[grade] / graded.length) * 100 : 0}%"></span></div><div class="grade-value">${counts[grade]} / ${percent(counts[grade], graded.length)}</div></div>`).join('')}</div></div>`;
+      }).join('');
+    }
+    function renderCompare(entries) {
+      compareGrid.innerHTML = comparePairs.map(pair => {
+        const leftEntries = entries.filter(item => item.setKey === pair.left.key);
+        const rightEntries = entries.filter(item => item.setKey === pair.right.key);
+        const renderSide = (title, rows, allEntries) => {
+          const graded = allEntries.filter(item => item.grade);
+          const counts = getGradeCounts(graded);
+          const passCount = counts.A + counts.B + counts.C;
+          return `<div class="compare-side"><h4>${title}</h4><div class="matrix-topline"><div class="mini-chip">通过率 ${percent(passCount, graded.length)}</div><div class="mini-chip">D 比例 ${percent(counts.D, graded.length)}</div><div class="mini-chip">已写备注 ${allEntries.filter(item => item.note).length}</div></div><div class="compare-list">${rows.length ? rows.slice(0, 6).map(([label, count]) => `<div class="compare-item"><strong>${label}</strong><span>出现 ${count} 次</span></div>`).join('') : '<div class="empty">还没有备注可用于关键词对照。</div>'}</div></div>`;
+        };
+        return `<div class="compare-card"><h3>${pair.title}</h3><div class="compare-pair">${renderSide(pair.left.label, countIssuesForEntries(leftEntries), leftEntries)}${renderSide(pair.right.label, countIssuesForEntries(rightEntries), rightEntries)}</div></div>`;
+      }).join('');
+    }
+    function renderIssues(entries) {
+      const overall = countIssuesForEntries(entries);
+      overallIssues.innerHTML = overall.length ? overall.slice(0, 10).map(([label, count]) => `<div class="issue-item"><strong>${label}</strong><span>共提到 ${count} 次</span></div>`).join('') : '<div class="empty">还没有备注内容。</div>';
+      setIssues.innerHTML = testSets.map(set => {
+        const rows = countIssuesForEntries(entries.filter(item => item.setKey === set.key)).slice(0, 6);
+        return `<div class="issue-item"><strong>${set.label}</strong><span>${rows.length ? rows.map(([label, count]) => `${label} ${count} 次`).join(' · ') : '暂无可统计备注。'}</span></div>`;
+      }).join('');
+    }
+    function renderNotes(entries) {
+      notesGrid.innerHTML = testSets.map(set => {
+        const items = entries.filter(item => item.setKey === set.key && (item.note || item.grade)).sort((a, b) => a.sceneId - b.sceneId);
+        if (!items.length) return `<div class="note-card"><h3>${set.label}</h3><div class="empty">还没有记录。</div></div>`;
+        return `<div class="note-card"><h3>${set.label}</h3><div class="note-list">${items.slice(0, 20).map(item => `<div class="note-item"><strong>场景 ${pad(item.sceneId)} · ${item.grade || '未打分'}</strong><span>${item.note || '已评分，暂未填写备注。'}</span></div>`).join('')}</div></div>`;
+      }).join('');
+    }
+    async function renderAll() {
+      try {
+        const entries = await getEntries();
+        renderSummary(entries);
+        renderMatrix(entries);
+        renderCompare(entries);
+        renderIssues(entries);
+        renderNotes(entries);
+      } catch (error) {
+        summaryGrid.innerHTML = `<div class="empty">读取评分快照失败：${error.message}</div>`;
+      }
+    }
+    refreshBtn.addEventListener('click', renderAll);
+    renderAll();
+  </script>
+</body>
+</html>

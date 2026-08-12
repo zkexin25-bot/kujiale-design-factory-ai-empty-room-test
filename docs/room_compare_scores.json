@@ -1,0 +1,706 @@
+{
+  "beautifyLora_01": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_01": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_01": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_01": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_02": {
+    "grade": "D",
+    "note": "墙面出现了柜子"
+  },
+  "realtimeLora_02": {
+    "grade": "D",
+    "note": "墙面出现了柜子"
+  },
+  "beautifyOnline_02": {
+    "grade": "D",
+    "note": "出现丑陋反光划痕"
+  },
+  "beautifyLora_02": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_03": {
+    "grade": "D",
+    "note": "颜色出现错误，又蓝变紫"
+  },
+  "beautifyLora_03": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_03": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_03": {
+    "grade": "D",
+    "note": "墙面出现了柜子"
+  },
+  "beautifyOnline_04": {
+    "grade": "D",
+    "note": "出现不符合结构的光，没有射灯但是墙上出现光斑"
+  },
+  "beautifyLora_04": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_04": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_04": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_05": {
+    "grade": "B",
+    "note": "地板颜色变深了很多"
+  },
+  "beautifyLora_05": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_05": {
+    "grade": "D",
+    "note": "门上的结构花纹被消掉了"
+  },
+  "realtimeLora_05": {
+    "grade": "D",
+    "note": "门上的结构花纹被消掉了"
+  },
+  "beautifyOnline_06": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_06": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_06": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_06": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_07": {
+    "grade": "D",
+    "note": "墙面出现丑陋反光划痕"
+  },
+  "realtime_07": {
+    "grade": "D",
+    "note": "装饰墙材质改变"
+  },
+  "realtimeLora_07": {
+    "grade": "D",
+    "note": "装饰墙材质改变"
+  },
+  "beautifyLora_07": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_08": {
+    "grade": "D",
+    "note": " 门把手的光影很生硬也会在柜子底面加灯带"
+  },
+  "beautifyLora_08": {
+    "grade": "D",
+    "note": "加了灯带"
+  },
+  "realtime_08": {
+    "grade": "D",
+    "note": "看不到灯泡的墙上加了灯泡"
+  },
+  "realtimeLora_08": {
+    "grade": "D",
+    "note": "看不到灯泡的墙上加了灯泡"
+  },
+  "beautifyOnline_09": {
+    "grade": "C",
+    "note": " 颜色有严重问题"
+  },
+  "beautifyLora_09": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_09": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_09": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_10": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_10": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_10": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_10": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_11": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_11": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_11": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_11": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_12": {
+    "grade": "B",
+    "note": "会放格纹光"
+  },
+  "beautifyOnline_12": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_12": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_12": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_13": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyLora_13": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_13": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_13": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_14": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_14": {
+    "grade": "B",
+    "note": "玻璃反光把手很严重，封模线被增强\n"
+  },
+  "beautifyLora_14": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_14": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_15": {
+    "grade": "C",
+    "note": "丑陋大炫光"
+  },
+  "beautifyLora_15": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_15": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_15": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_16": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_16": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_16": {
+    "grade": "B",
+    "note": ""
+  },
+  "realtimeLora_16": {
+    "grade": "B",
+    "note": "美缝隙"
+  },
+  "beautifyOnline_17": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_17": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_17": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_17": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_18": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyLora_18": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_18": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_18": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyOnline_19": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyLora_19": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_19": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_19": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_20": {
+    "grade": "D",
+    "note": ""
+  },
+  "realtime_20": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_20": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyLora_20": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_21": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_21": {
+    "grade": "B",
+    "note": ""
+  },
+  "realtime_21": {
+    "grade": "B",
+    "note": ""
+  },
+  "realtimeLora_21": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyLora_22": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_22": {
+    "grade": "C",
+    "note": "曝光非常的严重"
+  },
+  "realtimeLora_22": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_22": {
+    "grade": "B",
+    "note": "曝光非常的严重"
+  },
+  "beautifyOnline_23": {
+    "grade": "D",
+    "note": ""
+  },
+  "beautifyLora_23": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_23": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_23": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_24": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_24": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_25": {
+    "grade": "D",
+    "note": ""
+  },
+  "realtimeLora_25": {
+    "grade": "D",
+    "note": "床品颜色材质全改了"
+  },
+  "realtime_25": {
+    "grade": "C",
+    "note": "曝光"
+  },
+  "beautifyLora_25": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_26": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_26": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyLora_26": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyOnline_26": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyOnline_27": {
+    "grade": "D",
+    "note": "场景的瓷钻的会变深 "
+  },
+  "realtimeLora_27": {
+    "grade": "D",
+    "note": "场景的瓷钻的会变深 "
+  },
+  "realtime_27": {
+    "grade": "D",
+    "note": "场景的瓷钻的会变深 "
+  },
+  "beautifyLora_27": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_28": {
+    "grade": "D",
+    "note": "墙体颜色问题很大"
+  },
+  "realtimeLora_28": {
+    "grade": "D",
+    "note": "灯光结构改变了"
+  },
+  "realtime_28": {
+    "grade": "D",
+    "note": "灯光结构改变了"
+  },
+  "beautifyLora_28": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyOnline_29": {
+    "grade": "D",
+    "note": ""
+  },
+  "beautifyLora_29": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_29": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_29": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_30": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_30": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_30": {
+    "grade": "",
+    "note": "灯光结构错误"
+  },
+  "beautifyOnline_31": {
+    "grade": "D",
+    "note": ""
+  },
+  "beautifyLora_31": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_31": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_31": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_32": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_32": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_32": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_32": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyOnline_33": {
+    "grade": "",
+    "note": "厨房不正常的光线"
+  },
+  "realtime_33": {
+    "grade": "",
+    "note": "门上出现了把手"
+  },
+  "realtimeLora_33": {
+    "grade": "",
+    "note": "墙面颜色变化大"
+  },
+  "beautifyOnline_34": {
+    "grade": "D",
+    "note": "墙面颜色变化大"
+  },
+  "beautifyLora_34": {
+    "grade": "C",
+    "note": "墙面颜色变化大"
+  },
+  "realtime_34": {
+    "grade": "C",
+    "note": "墙面颜色变化大"
+  },
+  "realtimeLora_34": {
+    "grade": "C",
+    "note": "墙面颜色变化大"
+  },
+  "beautifyOnline_35": {
+    "grade": "A",
+    "note": "出现不符合原图的射灯"
+  },
+  "beautifyLora_35": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_35": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_35": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_36": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyLora_36": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_36": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_36": {
+    "grade": "B",
+    "note": "墙面颜色轻微变化"
+  },
+  "beautifyOnline_37": {
+    "grade": "D",
+    "note": "出现不符合原图的光影"
+  },
+  "realtimeLora_37": {
+    "grade": "D",
+    "note": "出现不符合原图的射灯"
+  },
+  "realtime_37": {
+    "grade": "D",
+    "note": "出现不符合原图的光影"
+  },
+  "beautifyLora_37": {
+    "grade": "A",
+    "note": "出现不符合原图的光影"
+  },
+  "beautifyOnline_38": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyLora_38": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_38": {
+    "grade": "D",
+    "note": "厨房推拉门把手 颜色错误、灯光错误"
+  },
+  "realtimeLora_38": {
+    "grade": "D",
+    "note": "厨房推拉门把手 颜色错误"
+  },
+  "realtime_39": {
+    "grade": "D",
+    "note": "出现射灯"
+  },
+  "realtimeLora_39": {
+    "grade": "D",
+    "note": "出现射灯"
+  },
+  "beautifyLora_39": {
+    "grade": "A",
+    "note": ""
+  },
+  "beautifyOnline_39": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyOnline_40": {
+    "grade": "D",
+    "note": "暗度走廊出现射灯"
+  },
+  "realtimeLora_40": {
+    "grade": "D",
+    "note": "暗度走廊出现射灯"
+  },
+  "realtime_40": {
+    "grade": "D",
+    "note": "暗度走廊出现射灯"
+  },
+  "beautifyLora_40": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtimeLora_41": {
+    "grade": "D",
+    "note": "莫名出现了柜子"
+  },
+  "realtime_41": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyOnline_41": {
+    "grade": "D",
+    "note": ""
+  },
+  "beautifyLora_41": {
+    "grade": "C",
+    "note": ""
+  },
+  "beautifyOnline_42": {
+    "grade": "C",
+    "note": "光影"
+  },
+  "beautifyLora_42": {
+    "grade": "D",
+    "note": "物品颜色改变"
+  },
+  "realtime_42": {
+    "grade": "D",
+    "note": "物品颜色改变"
+  },
+  "realtimeLora_42": {
+    "grade": "D",
+    "note": "物品颜色改变"
+  },
+  "beautifyOnline_43": {
+    "grade": "D",
+    "note": "光影和墙面"
+  },
+  "beautifyLora_43": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_43": {
+    "grade": "D",
+    "note": ""
+  },
+  "realtimeLora_43": {
+    "grade": "C",
+    "note": "墙变柜子"
+  },
+  "beautifyOnline_44": {
+    "grade": "D",
+    "note": "离谱射灯大反光（"
+  },
+  "realtimeLora_44": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtime_44": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyLora_44": {
+    "grade": "B",
+    "note": ""
+  },
+  "beautifyOnline_45": {
+    "grade": "B",
+    "note": "光斑"
+  },
+  "beautifyLora_45": {
+    "grade": "A",
+    "note": ""
+  },
+  "realtime_45": {
+    "grade": "C",
+    "note": ""
+  },
+  "realtimeLora_45": {
+    "grade": "B",
+    "note": ""
+  }
+}

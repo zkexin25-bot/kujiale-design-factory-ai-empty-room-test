@@ -1,0 +1,378 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>空房间测试对照页</title>
+  <style>
+    :root {
+      --bg: #f3efe7;
+      --panel: rgba(255,255,255,0.84);
+      --line: rgba(74, 61, 43, 0.14);
+      --text: #2e2417;
+      --muted: #7a6a56;
+      --accent: #c96d3a;
+      --accent-soft: #f5d9c8;
+      --shadow: 0 22px 60px rgba(86, 63, 31, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(235, 201, 172, 0.62), transparent 28%),
+        radial-gradient(circle at top right, rgba(210, 225, 208, 0.58), transparent 24%),
+        linear-gradient(180deg, #f8f4ec 0%, #efe8dc 100%);
+      min-height: 100vh;
+    }
+    .shell { width: min(1440px, calc(100vw - 32px)); margin: 24px auto 56px; }
+    .hero {
+      background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,247,240,0.88));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 28px 28px 22px;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 12px;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+    }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.04em; }
+    .hero p { margin: 10px 0 0; color: var(--muted); font-size: 15px; line-height: 1.65; max-width: 980px; }
+    .controls {
+      display: grid;
+      grid-template-columns: 1.5fr auto auto auto;
+      gap: 12px;
+      margin-top: 22px;
+      align-items: center;
+    }
+    .picker, .jump input, button {
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      color: var(--text);
+      font-size: 15px;
+      height: 48px;
+      padding: 0 16px;
+    }
+    .picker { width: 100%; }
+    .jump {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.94);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0 14px;
+      height: 48px;
+    }
+    .jump span { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .jump input { width: 72px; border: none; background: transparent; padding: 0; font-weight: 700; }
+    button { cursor: pointer; font-weight: 700; }
+    .primary { background: linear-gradient(135deg, #d97844, #be5f30); color: #fff; border-color: transparent; }
+    .summary { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; align-items: center; }
+    .chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.8);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .chip-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d97844, #be5f30);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+    .sections { margin-top: 24px; display: grid; gap: 18px; }
+    .section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .section h2 { margin: 0; font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.03em; }
+    .section-note { margin: 5px 0 0; color: var(--muted); font-size: 14px; }
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #8a4c23;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .grid-5, .grid-2 { display: grid; gap: 16px; }
+    .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card {
+      background: rgba(255,255,255,0.74);
+      border: 1px solid rgba(112, 92, 70, 0.16);
+      border-radius: 22px;
+      overflow: hidden;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-head {
+      padding: 14px 16px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .card-head h3 { margin: 0; font-size: 15px; letter-spacing: -0.02em; }
+    .card-head span { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .frame {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, rgba(235,223,208,0.95), rgba(252,247,240,0.95));
+      border-top: 1px solid rgba(112, 92, 70, 0.1);
+      border-bottom: 1px solid rgba(112, 92, 70, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .meta { padding: 12px 16px 16px; font-size: 13px; color: var(--muted); }
+    .hint {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.7);
+      border: 1px dashed rgba(112, 92, 70, 0.22);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 10px; }
+    .thumb {
+      min-height: 74px;
+      padding: 10px 8px;
+      border-radius: 18px;
+      border: 1px solid rgba(112, 92, 70, 0.16);
+      background: rgba(255,255,255,0.74);
+      cursor: pointer;
+    }
+    .thumb strong, .thumb small { display: block; text-align: center; }
+    .thumb strong { font-size: 16px; }
+    .thumb small { margin-top: 4px; color: var(--muted); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .thumb.active { background: linear-gradient(135deg, #d97844, #be5f30); border-color: transparent; color: #fff; }
+    .thumb.active small { color: rgba(255,255,255,0.82); }
+    .lightbox {
+      position: fixed; inset: 0; background: rgba(39, 28, 18, 0.68); display: none;
+      align-items: center; justify-content: center; z-index: 80; padding: 24px; backdrop-filter: blur(10px);
+    }
+    .lightbox.open { display: flex; }
+    .lightbox-panel {
+      width: min(1200px, 100%); max-height: 92vh; background: rgba(255,255,255,0.96);
+      border-radius: 28px; overflow: hidden; box-shadow: 0 28px 80px rgba(0,0,0,0.22);
+    }
+    .lightbox-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 18px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(250,238,229,0.94));
+      border-bottom: 1px solid rgba(112, 92, 70, 0.12);
+    }
+    .lightbox-title strong { display: block; font-size: 16px; }
+    .lightbox-title span { display: block; margin-top: 4px; color: var(--muted); font-size: 13px; word-break: break-all; }
+    .lightbox-close { width: 44px; min-width: 44px; padding: 0; font-size: 22px; line-height: 1; }
+    .lightbox-body {
+      display: flex; align-items: center; justify-content: center; padding: 18px;
+      max-height: calc(92vh - 84px); overflow: auto;
+      background: linear-gradient(180deg, rgba(247, 240, 232, 0.92), rgba(255, 251, 247, 0.98));
+    }
+    .lightbox-body img {
+      max-width: 100%; max-height: calc(92vh - 120px); width: auto; height: auto;
+      object-fit: contain; border-radius: 18px; background: #fff;
+    }
+    @media (max-width: 1160px) {
+      .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100vw - 16px, 100%); margin: 12px auto 36px; }
+      .hero { padding: 20px 18px 18px; position: static; }
+      .controls { grid-template-columns: 1fr; }
+      .grid-5, .grid-2 { grid-template-columns: 1fr; }
+      .section { padding: 16px; border-radius: 22px; }
+      .card { border-radius: 18px; }
+      .thumbs { grid-template-columns: repeat(auto-fill, minmax(62px, 1fr)); }
+      .lightbox { padding: 12px; }
+      .lightbox-panel { width: 100%; max-height: 96vh; border-radius: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <div class="eyebrow">Visual Compare Workspace</div>
+      <h1>空房间测试对照页</h1>
+      <p>按编号切换同一组原图和不同测试结果。这里提供公开查看版，任何人都可以在线浏览原图与各测试结果的对照、放大细看，并跳转到统计页查看当前评估结果。</p>
+      <div class="controls">
+        <select id="imagePicker" class="picker"></select>
+        <div class="jump"><span>跳转编号</span><input id="jumpInput" type="number" min="1" max="45" value="1" /></div>
+        <button id="prevBtn">上一张</button>
+        <button id="nextBtn" class="primary">下一张</button>
+      </div>
+      <div class="summary">
+        <div class="chip" id="summaryIndex">当前：01 / 45</div>
+        <div class="chip">原图对照：4 个测试集</div>
+        <div class="chip">横向对比：2 组重点测试</div>
+        <div class="chip">模式：公开查看版</div>
+        <a class="chip-link" href="./stats.html">进入统计页</a>
+      </div>
+    </section>
+
+    <div class="sections">
+      <section class="section">
+        <div class="section-head"><div><h2>原图与各测试结果</h2><p class="section-note">先看同一编号在五组图里的整体差异，适合快速判断每种方案的风格和稳定性。</p></div><div class="badge">Original vs All</div></div>
+        <div class="grid-5" id="overviewGrid"></div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>AI 美化横向对比</h2><p class="section-note">只看 AI 美化 LoRA 版和 AI 美化线上版，方便你观察细节强化、风格取向和一致性差异。</p></div><div class="badge">LoRA vs Online</div></div>
+        <div class="grid-2" id="beautifyCompare"></div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>实时增强横向对比</h2><p class="section-note">对照实时增强结果版和实时增强 LoRA 版，观察提亮、锐化、材质增强和保真程度。</p></div><div class="badge">Realtime vs Realtime LoRA</div></div>
+        <div class="grid-2" id="realtimeCompare"></div>
+        <div class="hint">提示：点击图片可放大预览；这个公开版只用于查看和对照，评分记录以当前公开快照为准。</div>
+      </section>
+      <section class="section">
+        <div class="section-head"><div><h2>编号导航</h2><p class="section-note">所有组按统一编号映射。你可以从这里直接跳到某一张场景。</p></div><div class="badge">1 - 45</div></div>
+        <div class="thumbs" id="thumbs"></div>
+      </section>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="图片放大预览">
+      <div class="lightbox-head">
+        <div class="lightbox-title"><strong id="lightboxLabel">图片预览</strong><span id="lightboxMeta"></span></div>
+        <button id="lightboxClose" class="lightbox-close" aria-label="关闭预览">×</button>
+      </div>
+      <div class="lightbox-body"><img id="lightboxImage" src="" alt="放大预览" /></div>
+    </div>
+  </div>
+
+  <script>
+    const DATA_PATH = './site-data.json';
+    let total = 45;
+    let current = 1;
+    let baseSets = [];
+    const overviewGrid = document.getElementById('overviewGrid');
+    const beautifyCompare = document.getElementById('beautifyCompare');
+    const realtimeCompare = document.getElementById('realtimeCompare');
+    const picker = document.getElementById('imagePicker');
+    const jumpInput = document.getElementById('jumpInput');
+    const summaryIndex = document.getElementById('summaryIndex');
+    const thumbs = document.getElementById('thumbs');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxLabel = document.getElementById('lightboxLabel');
+    const lightboxMeta = document.getElementById('lightboxMeta');
+    const lightboxClose = document.getElementById('lightboxClose');
+    function pad(num) { return String(num).padStart(2, '0'); }
+    function filePath(set, index) { return `${set.folder}/${set.prefix}${pad(index)}.jpg`; }
+    function makeCard(set, index) {
+      const src = filePath(set, index);
+      const fileName = `${set.prefix}${pad(index)}.jpg`;
+      return `<article class="card"><div class="card-head"><h3>${set.label}</h3><span>${set.tag}</span></div><div class="frame"><img src="${src}" alt="${set.label} ${pad(index)}" loading="eager" data-zoom-src="${src}" data-zoom-label="${set.label}" data-zoom-meta="${fileName}" /></div><div class="meta">${fileName}</div></article>`;
+    }
+    function openLightbox(src, label, meta) {
+      lightboxImage.src = src;
+      lightboxLabel.textContent = label;
+      lightboxMeta.textContent = meta;
+      lightbox.classList.add('open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      lightbox.classList.remove('open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      lightboxImage.src = '';
+      document.body.style.overflow = '';
+    }
+    function renderPicker() {
+      picker.innerHTML = Array.from({ length: total }, (_, i) => `<option value="${i + 1}">场景 ${pad(i + 1)}</option>`).join('');
+      picker.value = current;
+    }
+    function renderThumbs() {
+      thumbs.innerHTML = Array.from({ length: total }, (_, i) => {
+        const n = i + 1;
+        return `<button class="thumb ${n === current ? 'active' : ''}" data-index="${n}"><strong>${pad(n)}</strong><small>场景</small></button>`;
+      }).join('');
+    }
+    function render() {
+      if (!baseSets.length) return;
+      summaryIndex.textContent = `当前：${pad(current)} / ${total}`;
+      picker.value = String(current);
+      jumpInput.value = current;
+      overviewGrid.innerHTML = baseSets.map(set => makeCard(set, current)).join('');
+      beautifyCompare.innerHTML = [baseSets[1], baseSets[2]].map(set => makeCard(set, current)).join('');
+      realtimeCompare.innerHTML = [baseSets[3], baseSets[4]].map(set => makeCard(set, current)).join('');
+      renderThumbs();
+    }
+    function setCurrent(next) {
+      if (!Number.isFinite(next)) return;
+      current = Math.min(total, Math.max(1, next));
+      render();
+    }
+    async function loadSiteData() {
+      const response = await fetch(DATA_PATH);
+      const data = await response.json();
+      baseSets = data.sets || [];
+      total = data.total || total;
+    }
+    picker.addEventListener('change', (event) => setCurrent(Number(event.target.value)));
+    jumpInput.addEventListener('change', (event) => setCurrent(Number(event.target.value)));
+    prevBtn.addEventListener('click', () => setCurrent(current - 1));
+    nextBtn.addEventListener('click', () => setCurrent(current + 1));
+    thumbs.addEventListener('click', (event) => {
+      const btn = event.target.closest('[data-index]');
+      if (!btn) return;
+      setCurrent(Number(btn.dataset.index));
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    document.addEventListener('click', (event) => {
+      const img = event.target.closest('img[data-zoom-src]');
+      if (img) return openLightbox(img.dataset.zoomSrc, img.dataset.zoomLabel, img.dataset.zoomMeta);
+      if (event.target === lightbox) closeLightbox();
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && lightbox.classList.contains('open')) return closeLightbox();
+      if (event.key === 'ArrowLeft') setCurrent(current - 1);
+      if (event.key === 'ArrowRight') setCurrent(current + 1);
+    });
+    (async function init() { await loadSiteData(); renderPicker(); render(); })();
+  </script>
+</body>
+</html>
