@@ -236,12 +236,12 @@
       <p>按编号切换同一组原图和不同测试结果。这里提供公开查看版，任何人都可以在线浏览原图与各测试结果的对照、放大细看，并跳转到统计页查看当前评估结果。</p>
       <div class="controls">
         <select id="imagePicker" class="picker"></select>
-        <div class="jump"><span>跳转编号</span><input id="jumpInput" type="number" min="1" max="45" value="1" /></div>
+        <div class="jump"><span>跳转编号</span><input id="jumpInput" type="number" min="1" max="40" value="1" /></div>
         <button id="prevBtn">上一张</button>
         <button id="nextBtn" class="primary">下一张</button>
       </div>
       <div class="summary">
-        <div class="chip" id="summaryIndex">当前：01 / 45</div>
+        <div class="chip" id="summaryIndex">当前：01 / 40</div>
         <div class="chip">原图对照：4 个测试集</div>
         <div class="chip">横向对比：2 组重点测试</div>
         <div class="chip">模式：公开查看版</div>
@@ -264,7 +264,7 @@
         <div class="hint">提示：点击图片可放大预览；这个公开版只用于查看和对照，评分记录以当前公开快照为准。</div>
       </section>
       <section class="section">
-        <div class="section-head"><div><h2>编号导航</h2><p class="section-note">所有组按统一编号映射。你可以从这里直接跳到某一张场景。</p></div><div class="badge">1 - 45</div></div>
+        <div class="section-head"><div><h2>编号导航</h2><p class="section-note">所有组按统一编号映射。你可以从这里直接跳到某一张场景。</p></div><div class="badge">1 - 40</div></div>
         <div class="thumbs" id="thumbs"></div>
       </section>
     </div>
@@ -282,7 +282,7 @@
 
   <script>
     const DATA_PATH = './site-data.json';
-    let total = 45;
+    let total = 40;
     let current = 1;
     let baseSets = [];
     const overviewGrid = document.getElementById('overviewGrid');
@@ -376,3 +376,4 @@
   </script>
 </body>
 </html>
+

@@ -535,14 +535,14 @@
         <select id="imagePicker" class="picker"></select>
         <div class="jump">
           <span>跳转编号</span>
-          <input id="jumpInput" type="number" min="1" max="45" value="1" />
+          <input id="jumpInput" type="number" min="1" max="40" value="1" />
         </div>
         <button id="prevBtn">上一张</button>
         <button id="nextBtn" class="primary">下一张</button>
       </div>
 
       <div class="summary">
-        <div class="chip" id="summaryIndex">当前：01 / 45</div>
+        <div class="chip" id="summaryIndex">当前：01 / 共 40 张</div>
         <div class="chip">原图对照：4 个测试集</div>
         <div class="chip">横向对比：2 组重点测试</div>
         <div class="chip" id="storageMode">存储：文件模式</div>
@@ -589,9 +589,9 @@
         <div class="section-head">
           <div>
             <h2>编号导航</h2>
-            <p class="section-note">所有组按统一编号映射。你可以从这里直接跳到某一张场景。</p>
+            <p class="section-note">所有组按统一编号映射。你可以从这里直接跳到任一场景编号。</p>
           </div>
-          <div class="badge">1 - 45</div>
+          <div class="badge">1 - 40</div>
         </div>
         <div class="thumbs" id="thumbs"></div>
       </section>
@@ -618,15 +618,16 @@
     const API_BASE = 'http://127.0.0.1:32123';
 
     const baseSets = [
-      { key: 'original', label: '原图', tag: 'Original', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间测试1-45', prefix: '空房间测试' },
-      { key: 'beautifyOnline', label: 'AI 美化线上版', tag: 'Beautify Online', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间ai美化线上版测试1-45', prefix: '空房间ai美化线上版' },
-      { key: 'beautifyLora', label: 'AI 美化 LoRA 版', tag: 'Beautify LoRA', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间ai美化测试lora版1-45', prefix: '空房间ai美化测试' },
-      { key: 'realtime', label: '实时增强结果版', tag: 'Realtime', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间实时增强测试结果版1-45', prefix: '空房间实时增强测试' },
-      { key: 'realtimeLora', label: '实时增强 LoRA 版', tag: 'Realtime LoRA', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间实时增强测试lora1-45', prefix: '空房间实时增强lora测试' }
+      { key: 'original', label: '原图', tag: 'Original', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间测试1-40', prefix: '空房间测试' },
+      { key: 'beautifyOnline', label: 'AI 美化线上版', tag: 'Beautify Online', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间ai美化线上版测试1-40', prefix: '空房间ai美化线上版' },
+      { key: 'beautifyLora', label: 'AI 美化 LoRA 版', tag: 'Beautify LoRA', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间ai美化测试lora版1-40', prefix: '空房间ai美化测试' },
+      { key: 'realtime', label: '实时增强结果版', tag: 'Realtime', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间实时增强测试结果版1-40', prefix: '空房间实时增强测试' },
+      { key: 'realtimeLora', label: '实时增强 LoRA 版', tag: 'Realtime LoRA', folder: 'C:/Users/Administrator/Desktop/空房间测试集/空房间实时增强测试lora1-40', prefix: '空房间实时增强lora测试' }
     ];
 
-    const total = 45;
-    let current = 1;
+    const availableIndices = Array.from({ length: 40 }, (_, i) => i + 1);
+    const total = availableIndices.length;
+    let current = availableIndices[0];
     let scoreStore = {};
 
     const overviewGrid = document.getElementById('overviewGrid');
@@ -808,17 +809,26 @@
       document.body.style.overflow = '';
     }
 
+    function getClosestIndex(next) {
+      if (availableIndices.includes(next)) return next;
+      const larger = availableIndices.find((value) => value >= next);
+      return larger ?? availableIndices[availableIndices.length - 1];
+    }
+
+    function stepCurrent(offset) {
+      const currentPos = availableIndices.indexOf(current);
+      const nextPos = Math.min(availableIndices.length - 1, Math.max(0, currentPos + offset));
+      current = availableIndices[nextPos];
+      render();
+    }
+
     function renderPicker() {
-      picker.innerHTML = Array.from({ length: total }, (_, i) => {
-        const n = i + 1;
-        return `<option value="${n}">场景 ${pad(n)}</option>`;
-      }).join('');
+      picker.innerHTML = availableIndices.map((n) => `<option value="${n}">场景 ${pad(n)}</option>`).join('');
       picker.value = current;
     }
 
     function renderThumbs() {
-      thumbs.innerHTML = Array.from({ length: total }, (_, i) => {
-        const n = i + 1;
+      thumbs.innerHTML = availableIndices.map((n) => {
         return `
           <button class="thumb ${n === current ? 'active' : ''}" data-index="${n}">
             <strong>${pad(n)}</strong>
@@ -829,9 +839,11 @@
     }
 
     function render() {
-      summaryIndex.textContent = `当前：${pad(current)} / ${total}`;
+      summaryIndex.textContent = `当前：${pad(current)} / 共 ${total} 张`;
       picker.value = String(current);
       jumpInput.value = current;
+      jumpInput.min = String(availableIndices[0]);
+      jumpInput.max = String(availableIndices[availableIndices.length - 1]);
       overviewGrid.innerHTML = baseSets.map(set => makeCard(set, current)).join('');
       beautifyCompare.innerHTML = [baseSets[1], baseSets[2]].map(set => makeCard(set, current)).join('');
       realtimeCompare.innerHTML = [baseSets[3], baseSets[4]].map(set => makeCard(set, current)).join('');
@@ -840,14 +852,14 @@
 
     function setCurrent(next) {
       if (!Number.isFinite(next)) return;
-      current = Math.min(total, Math.max(1, next));
+      current = getClosestIndex(next);
       render();
     }
 
     picker.addEventListener('change', (event) => setCurrent(Number(event.target.value)));
     jumpInput.addEventListener('change', (event) => setCurrent(Number(event.target.value)));
-    prevBtn.addEventListener('click', () => setCurrent(current - 1));
-    nextBtn.addEventListener('click', () => setCurrent(current + 1));
+    prevBtn.addEventListener('click', () => stepCurrent(-1));
+    nextBtn.addEventListener('click', () => stepCurrent(1));
 
     thumbs.addEventListener('click', (event) => {
       const btn = event.target.closest('[data-index]');
@@ -886,8 +898,8 @@
         closeLightbox();
         return;
       }
-      if (event.key === 'ArrowLeft') setCurrent(current - 1);
-      if (event.key === 'ArrowRight') setCurrent(current + 1);
+      if (event.key === 'ArrowLeft') stepCurrent(-1);
+      if (event.key === 'ArrowRight') stepCurrent(1);
     });
 
     (async function init() {
@@ -898,6 +910,9 @@
   </script>
 </body>
 </html>
+
+
+
 
 
 
